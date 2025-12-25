@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 import { CarrinhoIcon, LogoIcon, PerfilIcon, SearchIcon } from '@/common/icons'
 import Input from '@/components/Input'
 import Typography from '@/components/Typography'
-import styles from './Header.module.scss'
+import styles from './Header.module.css'
 
 interface HeaderProps {
     cartCount: number
