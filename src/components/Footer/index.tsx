@@ -1,0 +1,74 @@
+import { LogoVerdeIcon } from '@/common/icons'
+import type { ReactNode } from 'react'
+import Divider from '@/components/Divider'
+import Typography from '@/components/Typography'
+import FooterSection from './FooterSection'
+import styles from './Footer.module.css'
+
+interface Section {
+    title: string
+    items: string[]
+}
+
+interface FooterProps {
+    sections: Section[]
+    paymentIcons: ReactNode[]
+    socialIcons: ReactNode[]
+}
+
+const Footer = ({ sections, paymentIcons, socialIcons }: FooterProps) => {
+    return (
+        <>
+            <footer className={styles.footer}>
+                <section className="container">
+                    <div className={styles.sectionsContainer}>
+                        <div className={styles.logoAndSlogan}>
+                            <LogoVerdeIcon />
+                            <Typography className={styles.sloganText}>
+                                Hora de abraçar seu lado geek!
+                            </Typography>
+                        </div>
+
+                        {sections.map((section, index) => (
+                            <FooterSection
+                                key={`footer-item-${index}`}
+                                title={section.title}
+                                items={section.items}
+                            />
+                        ))}
+                    </div>
+
+                    <Divider />
+
+                    <div className={styles.subFooter}>
+                        <div className={styles.paymentMethods}>
+                            <Typography variantStyle="body-large-bold">
+                                Formas de Pagamento
+                            </Typography>
+                            <div className={styles.paymentIcons}>
+                                {paymentIcons.map((icon, index) => icon)}
+                            </div>
+                        </div>
+
+                        <div className={styles.socialMedia}>
+                            <Typography variantStyle="body-large-bold">
+                                Siga nossas redes:
+                            </Typography>
+                            <div className={styles.socialIcons}>
+                                {socialIcons.map((icon, index) => icon)}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </footer>
+            <div className={styles.copryright}>
+                <Typography variantStyle="body">
+                    Desenvolvido por Alura. Projeto fictício sem fins
+                    comerciais.
+                </Typography>
+            </div>
+        </>
+    )
+}
+
+export default Footer
