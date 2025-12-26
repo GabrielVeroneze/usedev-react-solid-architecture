@@ -1,16 +1,16 @@
 import { ShoppingBagIcon } from '@/common/icons'
+import type { CartActionHandlers } from '@/common/types/cartActionHandlers'
 import type { Product } from '@/common/types/product'
+import CartActions from '@/components/CartActions'
 import Typography from '@/components/Typography'
 import Field from '@/components/Field'
 import Divider from '@/components/Divider'
-import Button from '@/components/Button'
 import styles from './CartSummary.module.css'
 
-interface CartSummaryProps {
+interface CartSummaryProps extends CartActionHandlers {
     cartItems: Product[]
     total: number
     freight: number
-    handleRedirect: () => void
 }
 
 const CartSummary = ({
@@ -18,6 +18,7 @@ const CartSummary = ({
     total,
     freight,
     handleRedirect,
+    onPayment,
 }: CartSummaryProps) => {
     return (
         <div className={styles.cartSummary}>
@@ -57,14 +58,10 @@ const CartSummary = ({
                     R$ {total + freight}
                 </Typography>
             </div>
-            <div className={styles.cartActions}>
-                <Button onClick={handleRedirect} variant="secondary">
-                    Continuar comprando
-                </Button>
-                <Button onClick={() => console.log('pagamento')}>
-                    Ir para pagamento
-                </Button>
-            </div>
+            <CartActions
+                handleRedirect={handleRedirect}
+                onPayment={onPayment}
+            />
         </div>
     )
 }
