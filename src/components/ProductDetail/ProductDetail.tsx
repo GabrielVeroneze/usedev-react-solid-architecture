@@ -74,10 +74,8 @@ const ProductDetail = ({
                 </div>
 
                 <div className={styles.action}>
-                    <Button
-                        icon={<AddCarrinhoIcon />}
-                        onClick={handleAddToCart}
-                    >
+                    <Button onClick={handleAddToCart}>
+                        <AddCarrinhoIcon />
                         Adicionar ao carrinho
                     </Button>
                 </div>
