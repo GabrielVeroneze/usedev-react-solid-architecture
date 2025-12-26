@@ -67,8 +67,9 @@ const HomePage = () => {
                 <Button
                     onClick={() => console.log('ver novidades')}
                     size="large"
-                    text="Ver as novidades!"
-                />
+                >
+                    Ver as novidades!
+                </Button>
             </HeroBanner>
             <main className="container">
                 <StatusHandler
