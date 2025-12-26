@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router'
 import { ShoppingBagIcon } from '@/common/icons'
 import type { Product } from '@/common/types/product'
+import CartItem from '@/components/CartItem'
 import Button from '@/components/Button'
 import Divider from '@/components/Divider'
 import Field from '@/components/Field'
@@ -27,7 +28,6 @@ const CartPage = ({ cartItems, removeFromCart }: CartPageProps) => {
             <div className={styles.cartTitle}>
                 <Typography variant="h4">Carrinho de Compras</Typography>
             </div>
-
             <section className={styles.cartPage}>
                 <div className={styles.cartItems}>
                     <Typography
@@ -38,35 +38,11 @@ const CartPage = ({ cartItems, removeFromCart }: CartPageProps) => {
                     </Typography>
                     {cartItems?.length > 0 ? (
                         cartItems.map((item) => (
-                            <div key={item.id} className={styles.cartItem}>
-                                <div className={styles.cartImageContainer}>
-                                    <img src={item.imageSrc} alt={item.label} />
-                                </div>
-                                <div className={styles.itemDetails}>
-                                    <div className={styles.itemDescription}>
-                                        <Typography variantStyle="h6-small">
-                                            {item.label}
-                                        </Typography>
-                                        <Typography variantStyle="body">
-                                            {item.description}
-                                        </Typography>
-                                    </div>
-                                    <Typography variantStyle="body-semi-bold">
-                                        R$ {item.price}
-                                    </Typography>
-                                    <Typography variantStyle="body-small-bold">
-                                        Quantidade: 1
-                                    </Typography>
-                                    <Typography variantStyle="body-small-bold">
-                                        Tamanho: único
-                                    </Typography>
-                                    <Button
-                                        onClick={() => removeFromCart(item.id)}
-                                    >
-                                        Excluir
-                                    </Button>
-                                </div>
-                            </div>
+                            <CartItem
+                                key={item.id}
+                                item={item}
+                                removeFromCart={removeFromCart}
+                            />
                         ))
                     ) : (
                         <div style={{ marginTop: '15px' }}>
