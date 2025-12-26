@@ -37,25 +37,26 @@ const Footer = ({ sections, paymentIcons, socialIcons }: FooterProps) => {
                             />
                         ))}
                     </div>
-
                     <Divider />
-
                     <div className={styles.subFooter}>
                         <div className={styles.paymentMethods}>
                             <Typography variantStyle="body-large-bold">
                                 Formas de Pagamento
                             </Typography>
                             <div className={styles.paymentIcons}>
-                                {paymentIcons.map((icon, index) => icon)}
+                                {paymentIcons.map((icon, index) => (
+                                    <span key={index}>{icon}</span>
+                                ))}
                             </div>
                         </div>
-
                         <div className={styles.socialMedia}>
                             <Typography variantStyle="body-large-bold">
                                 Siga nossas redes:
                             </Typography>
                             <div className={styles.socialIcons}>
-                                {socialIcons.map((icon, index) => icon)}
+                                {socialIcons.map((icon, index) => (
+                                    <span key={index}>{icon}</span>
+                                ))}
                             </div>
                         </div>
                     </div>
