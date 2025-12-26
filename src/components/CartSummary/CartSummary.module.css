@@ -31,11 +31,3 @@
     justify-content: space-between;
     color: var(--roxo);
 }
-
-.cartActions {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 32px;
-}
