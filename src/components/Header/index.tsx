@@ -3,6 +3,7 @@ import { Link } from 'react-router'
 import { CarrinhoIcon, LogoIcon, PerfilIcon, SearchIcon } from '@/common/icons'
 import Input from '@/components/Input'
 import Typography from '@/components/Typography'
+import Button from '@/components/Button'
 import styles from './Header.module.css'
 
 interface HeaderProps {
@@ -47,11 +48,13 @@ const Header = ({ cartCount, onSearch }: HeaderProps) => {
                             value={query}
                             onChange={handleInputChange}
                             placeholder="O que você procura?"
-                            icon={<SearchIcon />}
                         />
-                        <button onClick={handleSearch}>
-                            <i className="fa fa-search"></i>
-                        </button>
+                        <Button
+                            style={{ position: 'relative', right: '36px' }}
+                            onClick={handleSearch}
+                        >
+                            <SearchIcon />
+                        </Button>
                     </div>
                     <div className={styles.userActions}>
                         <a href="#">Login</a>
