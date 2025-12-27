@@ -1,4 +1,5 @@
 import Input, { type InputProps } from '@/components/Input'
+import styles from './InputIcon.module.css'
 
 interface InputIconProps extends InputProps {
     children: React.ReactNode
@@ -6,9 +7,9 @@ interface InputIconProps extends InputProps {
 
 const InputIcon = ({ children, ...props }: InputIconProps) => {
     return (
-        <div>
+        <div className={styles.inputIconContainer}>
             <Input {...props} />
-            <div>{children}</div>
+            <div className={styles.iconContainer}>{children}</div>
         </div>
     )
 }
