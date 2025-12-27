@@ -3,6 +3,7 @@ import { useParams } from 'react-router'
 import { PRODUCTS_BASE_URL } from '@/common/constants/endpoints'
 import type { Product } from '@/common/types/product'
 import axios from 'axios'
+import BackgroundBanner from '@/components/BackgroundBanner'
 import Typography from '@/components/Typography'
 import ProductDetail from '@/components/ProductDetail/ProductDetail'
 import StatusHandler from '@/common/utils/statusHandler'
@@ -41,29 +42,33 @@ const ProductDetailsPage = ({ addToCart }: ProductDetailsPageProps) => {
     }, [id])
 
     return (
-        <main className="container">
-            <section>
-                <div className={styles.productContainer}>
-                    <Typography variant="h4">Detalhes do Produto</Typography>
-
-                    <StatusHandler isLoading={isLoading} error={error}>
-                        {product ? (
-                            <ProductDetail
-                                id={product.id}
-                                title={product.label}
-                                description={product.description}
-                                price={product.price}
-                                imageUrl={product.imageSrc}
-                                colors={product.colors}
-                                addToCart={addToCart}
-                            />
-                        ) : (
-                            <p>Produto não encontrado.</p>
-                        )}
-                    </StatusHandler>
-                </div>
-            </section>
-        </main>
+        <>
+            <BackgroundBanner backgroundImage="https://raw.githubusercontent.com/gss-patricia/use-dev-assets/refs/heads/main/banner-secoes.png" />
+            <main className="container">
+                <section>
+                    <div className={styles.productContainer}>
+                        <Typography variant="h4">
+                            Detalhes do Produto
+                        </Typography>
+                        <StatusHandler isLoading={isLoading} error={error}>
+                            {product ? (
+                                <ProductDetail
+                                    id={product.id}
+                                    title={product.label}
+                                    description={product.description}
+                                    price={product.price}
+                                    imageUrl={product.imageSrc}
+                                    colors={product.colors}
+                                    addToCart={addToCart}
+                                />
+                            ) : (
+                                <p>Produto não encontrado.</p>
+                            )}
+                        </StatusHandler>
+                    </div>
+                </section>
+            </main>
+        </>
     )
 }
 
