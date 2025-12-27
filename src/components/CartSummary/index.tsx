@@ -1,6 +1,5 @@
 import { ShoppingBagIcon } from '@/common/icons'
 import type { CartActionHandlers } from '@/common/types/cartActionHandlers'
-import type { Product } from '@/common/types/product'
 import CartActions from '@/components/CartActions'
 import Typography from '@/components/Typography'
 import Field from '@/components/Field'
@@ -8,13 +7,13 @@ import Divider from '@/components/Divider'
 import styles from './CartSummary.module.css'
 
 interface CartSummaryProps extends CartActionHandlers {
-    cartItems: Product[]
+    itemCount: number
     total: number
     freight: number
 }
 
 const CartSummary = ({
-    cartItems,
+    itemCount,
     total,
     freight,
     handleRedirect,
@@ -35,7 +34,7 @@ const CartSummary = ({
             </div>
             <div className={styles.summaryResume}>
                 <Typography variantStyle="body-small-bold">
-                    {cartItems.length} Produtos
+                    {itemCount} {itemCount > 1 ? 'Produtos' : 'Produto'}
                 </Typography>
                 <Typography variantStyle="body-small-bold">
                     R$ {total}
