@@ -3,7 +3,7 @@ import { AddCarrinhoIcon } from '@/common/icons/AddCarrinhoIcon'
 import type { Product } from '@/common/types/product'
 import RadioButton from '@/components/RadioButton'
 import Typography from '@/components/Typography'
-import Button from '@/components/Button'
+import ButtonIcon from '@/components/ButtonIcon'
 import styles from './ProductDetail.module.css'
 
 interface ProductDetailProps {
@@ -53,14 +53,12 @@ const ProductDetail = ({
                     className={styles.productImage}
                 />
             </div>
-
             <div className={styles.detailContainer}>
                 <Typography variant="h4">{title}</Typography>
                 <Typography variantStyle="body-large">{description}</Typography>
                 <Typography variantStyle="heading-semi-bold">
                     {price.toFixed(2)}
                 </Typography>
-
                 <div className={styles.radioGroup}>
                     {colors.map((color) => (
                         <RadioButton
@@ -72,12 +70,11 @@ const ProductDetail = ({
                         />
                     ))}
                 </div>
-
                 <div className={styles.action}>
-                    <Button onClick={handleAddToCart}>
+                    <ButtonIcon onClick={handleAddToCart}>
                         <AddCarrinhoIcon />
                         Adicionar ao carrinho
-                    </Button>
+                    </ButtonIcon>
                 </div>
             </div>
         </section>
