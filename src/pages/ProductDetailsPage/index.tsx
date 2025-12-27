@@ -5,7 +5,7 @@ import type { Product } from '@/common/types/product'
 import axios from 'axios'
 import BackgroundBanner from '@/components/BackgroundBanner'
 import Typography from '@/components/Typography'
-import ProductDetail from '@/components/ProductDetail/ProductDetail'
+import ProductDetail from '@/components/ProductDetail'
 import StatusHandler from '@/common/utils/statusHandler'
 import styles from './ProductDetailsPage.module.css'
 
