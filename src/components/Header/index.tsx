@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
 import { CarrinhoIcon, LogoIcon, PerfilIcon, SearchIcon } from '@/common/icons'
-import Input from '@/components/Input'
+import InputIcon from '@/components/InputIcon'
 import Typography from '@/components/Typography'
 import Button from '@/components/Button'
 import styles from './Header.module.css'
@@ -43,18 +43,19 @@ const Header = ({ cartCount, onSearch }: HeaderProps) => {
                         </ul>
                     </nav>
                     <div className={styles.searchContainer}>
-                        <Input
+                        <InputIcon
                             variant="secondary"
                             value={query}
                             onChange={handleInputChange}
                             placeholder="O que você procura?"
-                        />
-                        <Button
-                            style={{ position: 'relative', right: '36px' }}
-                            onClick={handleSearch}
                         >
-                            <SearchIcon />
-                        </Button>
+                            <Button
+                                style={{ position: 'relative', right: '36px' }}
+                                onClick={handleSearch}
+                            >
+                                <SearchIcon />
+                            </Button>
+                        </InputIcon>
                     </div>
                     <div className={styles.userActions}>
                         <a href="#">Login</a>
