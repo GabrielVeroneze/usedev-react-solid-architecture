@@ -30,6 +30,7 @@ const AppRoutes = ({
                         <CartPage
                             cartItems={cartItems}
                             removeFromCart={removeFromCart}
+                            cartCount={cartCount}
                         />
                     }
                 />
