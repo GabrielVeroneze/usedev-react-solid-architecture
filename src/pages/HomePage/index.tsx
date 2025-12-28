@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react'
 import {
     CATEGORIES_BASE_URL,
     PRODUCTS_BASE_URL,
 } from '@/common/constants/endpoints'
+import { useFetch } from '@/common/hooks/useFetch'
 import type { Category } from '@/common/types/category'
 import type { Product } from '@/common/types/product'
-import axios from 'axios'
 import Button from '@/components/Button'
 import Categories from '@/components/Categories'
 import HeroBanner from '@/components/HeroBanner'
@@ -15,44 +14,21 @@ import Typography from '@/components/Typography'
 import StatusHandler from '@/common/utils/statusHandler'
 
 const HomePage = () => {
-    const [categories, setCategories] = useState<Category[]>([])
-    const [products, setProducts] = useState<Product[]>([])
-    const [isLoadingCategories, setIsLoadingCategories] = useState(true)
-    const [isLoadingProducts, setIsLoadingProducts] = useState(true)
-    const [categoriesError, setCategoriesError] = useState<string | null>(null)
-    const [productsError, setProductsError] = useState<string | null>(null)
+    const {
+        data: categoriesData,
+        isLoading: isLoadingCategories,
+        error: categoriesError,
+    } = useFetch<{ categories: Category[] }>(CATEGORIES_BASE_URL)
+
+    const {
+        data: productsData,
+        isLoading: isLoadingProducts,
+        error: productsError,
+    } = useFetch<{ products: Product[] }>(PRODUCTS_BASE_URL)
 
     const handleSubscribe = (email: string) => {
         console.log(`Usuário inscrito com o email: ${email}`)
     }
-
-    // Fetch de categorias
-    useEffect(() => {
-        axios
-            .get(CATEGORIES_BASE_URL)
-            .then((response) => {
-                setCategories(response.data.categories)
-                setIsLoadingCategories(false)
-            })
-            .catch((err) => {
-                setCategoriesError('Erro ao carregar categorias.')
-                setIsLoadingCategories(false)
-            })
-    }, [])
-
-    // Fetch de produtos
-    useEffect(() => {
-        axios
-            .get(PRODUCTS_BASE_URL)
-            .then((response) => {
-                setProducts(response.data.products)
-                setIsLoadingProducts(false)
-            })
-            .catch((err) => {
-                setProductsError('Erro ao carregar produtos.')
-                setIsLoadingProducts(false)
-            })
-    }, [])
 
     return (
         <>
@@ -76,17 +52,20 @@ const HomePage = () => {
                     isLoading={isLoadingCategories}
                     error={categoriesError}
                 >
-                    <Categories categories={categories} />
+                    {categoriesData && (
+                        <Categories categories={categoriesData.categories} />
+                    )}
                 </StatusHandler>
-
                 <StatusHandler
                     isLoading={isLoadingProducts}
                     error={productsError}
                 >
-                    <ProductList
-                        title="Promoções especiais"
-                        products={products}
-                    />
+                    {productsData && (
+                        <ProductList
+                            title="Promoções especiais"
+                            products={productsData.products}
+                        />
+                    )}
                 </StatusHandler>
             </main>
             <Newsletter onSubscribe={handleSubscribe} />
