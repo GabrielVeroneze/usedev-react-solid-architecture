@@ -1,4 +1,4 @@
-import type { HttpClient } from './HttpClient'
+import type { HttpClient } from '@/common/types/httpClient'
 import axios from 'axios'
 
 export const Http = (): HttpClient => {
