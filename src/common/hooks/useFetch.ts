@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Http } from '@/common/lib/httpClient'
-import type { HttpClient } from '@/common/lib/httpClient/HttpClient'
+import type { HttpClient } from '@/common/types/httpClient'
 
 interface FetchResult<T> {
     data: T | null
