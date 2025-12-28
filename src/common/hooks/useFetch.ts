@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { Http } from '@/common/lib/httpClient'
+import type { HttpClient } from '@/common/lib/httpClient/HttpClient'
 
 interface FetchResult<T> {
     data: T | null
@@ -15,10 +16,11 @@ export const useFetch = <T>(url: string): FetchResult<T> => {
     useEffect(() => {
         setIsLoading(true)
 
-        axios
-            .get<T>(url)
+        const http: HttpClient = Http()
+
+        http.get<T>(url)
             .then((response) => {
-                setData(response.data)
+                setData(response)
                 setIsLoading(false)
             })
             .catch(() => {
