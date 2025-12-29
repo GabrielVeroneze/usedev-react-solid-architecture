@@ -1,9 +1,8 @@
-import { CATEGORIES_BASE_URL } from '@/common/constants/endpoints'
 import { Http } from '@/common/lib/httpClient'
 import { productService } from '@/common/services/productServices'
+import { categoryService } from '@/common/services/categoryServices'
 import { useFetchProducts } from '@/common/hooks/useFetchProducts'
-import { useFetch } from '@/common/hooks/useFetch'
-import type { Category } from '@/common/types/category'
+import { useFetchCategories } from '@/common/hooks/useFetchCategories'
 import Button from '@/components/Button'
 import Categories from '@/components/Categories'
 import HeroBanner from '@/components/HeroBanner'
@@ -14,13 +13,14 @@ import StatusHandler from '@/common/utils/statusHandler'
 
 const httpService = Http()
 const productsService = productService(httpService)
+const categoriesService = categoryService(httpService)
 
 const HomePage = () => {
     const {
-        data: categoriesData,
+        categories,
         isLoading: isLoadingCategories,
         error: categoriesError,
-    } = useFetch<{ categories: Category[] }>(CATEGORIES_BASE_URL)
+    } = useFetchCategories(categoriesService)
 
     const {
         products,
@@ -54,9 +54,7 @@ const HomePage = () => {
                     isLoading={isLoadingCategories}
                     error={categoriesError}
                 >
-                    {categoriesData && (
-                        <Categories categories={categoriesData.categories} />
-                    )}
+                    {categories && <Categories categories={categories} />}
                 </StatusHandler>
                 <StatusHandler
                     isLoading={isLoadingProducts}
