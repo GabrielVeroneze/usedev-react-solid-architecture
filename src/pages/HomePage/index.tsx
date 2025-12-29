@@ -1,10 +1,9 @@
-import {
-    CATEGORIES_BASE_URL,
-    PRODUCTS_BASE_URL,
-} from '@/common/constants/endpoints'
+import { CATEGORIES_BASE_URL } from '@/common/constants/endpoints'
+import { Http } from '@/common/lib/httpClient'
+import { productService } from '@/common/services/productServices'
+import { useFetchProducts } from '@/common/hooks/useFetchProducts'
 import { useFetch } from '@/common/hooks/useFetch'
 import type { Category } from '@/common/types/category'
-import type { Product } from '@/common/types/product'
 import Button from '@/components/Button'
 import Categories from '@/components/Categories'
 import HeroBanner from '@/components/HeroBanner'
@@ -12,6 +11,9 @@ import Newsletter from '@/components/Newsletter'
 import ProductList from '@/components/ProductList'
 import Typography from '@/components/Typography'
 import StatusHandler from '@/common/utils/statusHandler'
+
+const httpService = Http()
+const productsService = productService(httpService)
 
 const HomePage = () => {
     const {
@@ -21,10 +23,10 @@ const HomePage = () => {
     } = useFetch<{ categories: Category[] }>(CATEGORIES_BASE_URL)
 
     const {
-        data: productsData,
+        products,
         isLoading: isLoadingProducts,
         error: productsError,
-    } = useFetch<{ products: Product[] }>(PRODUCTS_BASE_URL)
+    } = useFetchProducts(productsService)
 
     const handleSubscribe = (email: string) => {
         console.log(`Usuário inscrito com o email: ${email}`)
@@ -60,10 +62,10 @@ const HomePage = () => {
                     isLoading={isLoadingProducts}
                     error={productsError}
                 >
-                    {productsData && (
+                    {products && (
                         <ProductList
                             title="Promoções especiais"
-                            products={productsData.products}
+                            products={products}
                         />
                     )}
                 </StatusHandler>
